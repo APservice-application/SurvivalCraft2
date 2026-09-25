@@ -1,0 +1,799 @@
+{
+  "$comment": "SHARED DATA - ใช้ร่วมกันทั้ง Web frontend และ Godot frontend (Spec ข้อ 36: Data-driven)",
+  "tileSize": 16,
+  "tiles": {
+    "deep_water": {
+      "id": "deep_water",
+      "name": "น้ำลึก",
+      "solid": true,
+      "liquid": true,
+      "speed": 0.4,
+      "footstep": "water",
+      "tags": [],
+      "texture": {
+        "base": "#123b63",
+        "palette": [
+          "#0e3355",
+          "#16456f",
+          "#1b4d7c"
+        ],
+        "noise": 0.3,
+        "features": [
+          {
+            "type": "wave",
+            "count": 10,
+            "color": "#2a6ea8",
+            "size": 3,
+            "alpha": 0.5
+          }
+        ]
+      }
+    },
+    "water": {
+      "id": "water",
+      "name": "น้ำ",
+      "solid": true,
+      "liquid": true,
+      "speed": 0.6,
+      "footstep": "water",
+      "tags": [],
+      "texture": {
+        "base": "#1d5d8c",
+        "palette": [
+          "#195578",
+          "#22699b",
+          "#2b76ab"
+        ],
+        "noise": 0.28,
+        "features": [
+          {
+            "type": "wave",
+            "count": 12,
+            "color": "#63b3dd",
+            "size": 3,
+            "alpha": 0.45
+          }
+        ]
+      }
+    },
+    "sand": {
+      "id": "sand",
+      "name": "ทราย",
+      "solid": false,
+      "speed": 0.92,
+      "footstep": "sand",
+      "tags": [
+        "diggable"
+      ],
+      "texture": {
+        "base": "#d9c489",
+        "palette": [
+          "#cfb87c",
+          "#e0cf98",
+          "#c9ae6e"
+        ],
+        "noise": 0.22,
+        "features": [
+          {
+            "type": "speckle",
+            "count": 26,
+            "color": "#b39a5e",
+            "size": 1,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 8,
+            "color": "#f2e6bd",
+            "size": 1,
+            "alpha": 0.5
+          }
+        ]
+      }
+    },
+    "grass": {
+      "id": "grass",
+      "name": "หญ้า",
+      "solid": false,
+      "speed": 1.0,
+      "footstep": "grass",
+      "tags": [
+        "soil_plantable",
+        "diggable"
+      ],
+      "texture": {
+        "base": "#4c8a3f",
+        "palette": [
+          "#43803a",
+          "#569444",
+          "#3d7534"
+        ],
+        "noise": 0.34,
+        "features": [
+          {
+            "type": "blade",
+            "count": 34,
+            "color": "#356b2d",
+            "size": 2,
+            "alpha": 0.55
+          },
+          {
+            "type": "blade",
+            "count": 16,
+            "color": "#6fae54",
+            "size": 1,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 6,
+            "color": "#7fbf5f",
+            "size": 1,
+            "alpha": 0.35
+          }
+        ]
+      }
+    },
+    "lush_grass": {
+      "id": "lush_grass",
+      "name": "หญ้าอุดมสมบูรณ์",
+      "solid": false,
+      "speed": 0.96,
+      "footstep": "grass",
+      "tags": [
+        "soil_plantable",
+        "diggable"
+      ],
+      "texture": {
+        "base": "#3f8040",
+        "palette": [
+          "#397539",
+          "#478c48",
+          "#336b34"
+        ],
+        "noise": 0.36,
+        "features": [
+          {
+            "type": "blade",
+            "count": 44,
+            "color": "#2c5c2b",
+            "size": 2,
+            "alpha": 0.6
+          },
+          {
+            "type": "blade",
+            "count": 20,
+            "color": "#7cc15e",
+            "size": 1,
+            "alpha": 0.5
+          }
+        ]
+      }
+    },
+    "forest_floor": {
+      "id": "forest_floor",
+      "name": "พื้นป่า",
+      "solid": false,
+      "speed": 0.9,
+      "footstep": "grass",
+      "tags": [
+        "soil_plantable",
+        "diggable"
+      ],
+      "texture": {
+        "base": "#3b6b33",
+        "palette": [
+          "#345f2d",
+          "#427537",
+          "#2d5427"
+        ],
+        "noise": 0.4,
+        "features": [
+          {
+            "type": "speckle",
+            "count": 30,
+            "color": "#5b4426",
+            "size": 2,
+            "alpha": 0.45
+          },
+          {
+            "type": "blade",
+            "count": 18,
+            "color": "#2a4d24",
+            "size": 2,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 8,
+            "color": "#6b8f3f",
+            "size": 1,
+            "alpha": 0.4
+          }
+        ]
+      }
+    },
+    "dirt": {
+      "id": "dirt",
+      "name": "ดิน",
+      "solid": false,
+      "speed": 0.95,
+      "footstep": "dirt",
+      "tags": [
+        "soil_plantable",
+        "diggable"
+      ],
+      "texture": {
+        "base": "#8a6640",
+        "palette": [
+          "#7d5c39",
+          "#96714a",
+          "#6f5233"
+        ],
+        "noise": 0.32,
+        "features": [
+          {
+            "type": "pebble",
+            "count": 10,
+            "color": "#5f4529",
+            "size": 2,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 14,
+            "color": "#a5834f",
+            "size": 1,
+            "alpha": 0.4
+          }
+        ]
+      }
+    },
+    "farmland": {
+      "id": "farmland",
+      "name": "แปลงเพาะปลูก",
+      "solid": false,
+      "speed": 0.9,
+      "footstep": "dirt",
+      "tags": [
+        "soil_plantable"
+      ],
+      "texture": {
+        "base": "#5e4326",
+        "palette": [
+          "#553c22",
+          "#684b2c",
+          "#4b3420"
+        ],
+        "noise": 0.26,
+        "features": [
+          {
+            "type": "furrow",
+            "count": 4,
+            "color": "#3f2c19",
+            "size": 1,
+            "alpha": 0.75
+          },
+          {
+            "type": "speckle",
+            "count": 10,
+            "color": "#7c5a33",
+            "size": 1,
+            "alpha": 0.4
+          }
+        ]
+      }
+    },
+    "stone": {
+      "id": "stone",
+      "name": "หิน",
+      "solid": false,
+      "speed": 1.0,
+      "footstep": "stone",
+      "tags": [
+        "diggable"
+      ],
+      "texture": {
+        "base": "#8b8b8f",
+        "palette": [
+          "#7d7d82",
+          "#9a9a9e",
+          "#707076"
+        ],
+        "noise": 0.24,
+        "features": [
+          {
+            "type": "crack",
+            "count": 7,
+            "color": "#5c5c61",
+            "size": 3,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 12,
+            "color": "#a8a8ad",
+            "size": 1,
+            "alpha": 0.45
+          }
+        ]
+      }
+    },
+    "rock": {
+      "id": "rock",
+      "name": "หน้าผาหิน",
+      "solid": true,
+      "speed": 0,
+      "footstep": "stone",
+      "tags": [
+        "mineable"
+      ],
+      "texture": {
+        "base": "#6e6e74",
+        "palette": [
+          "#5f5f66",
+          "#7c7c82",
+          "#54545a"
+        ],
+        "noise": 0.3,
+        "features": [
+          {
+            "type": "crack",
+            "count": 10,
+            "color": "#43434a",
+            "size": 4,
+            "alpha": 0.6
+          },
+          {
+            "type": "speckle",
+            "count": 10,
+            "color": "#8e8e94",
+            "size": 1,
+            "alpha": 0.4
+          }
+        ]
+      }
+    },
+    "snow": {
+      "id": "snow",
+      "name": "หิมะ",
+      "solid": false,
+      "speed": 0.85,
+      "footstep": "snow",
+      "tags": [
+        "diggable"
+      ],
+      "texture": {
+        "base": "#e9eef4",
+        "palette": [
+          "#dde4ec",
+          "#f4f8fc",
+          "#d3dce6"
+        ],
+        "noise": 0.16,
+        "features": [
+          {
+            "type": "speckle",
+            "count": 18,
+            "color": "#ffffff",
+            "size": 1,
+            "alpha": 0.6
+          },
+          {
+            "type": "speckle",
+            "count": 8,
+            "color": "#c3cfdc",
+            "size": 1,
+            "alpha": 0.4
+          }
+        ]
+      }
+    },
+    "mud": {
+      "id": "mud",
+      "name": "โคลน",
+      "solid": false,
+      "speed": 0.65,
+      "footstep": "dirt",
+      "tags": [
+        "soil_plantable",
+        "diggable"
+      ],
+      "texture": {
+        "base": "#5b4a34",
+        "palette": [
+          "#524230",
+          "#655239",
+          "#483a2b"
+        ],
+        "noise": 0.34,
+        "features": [
+          {
+            "type": "speckle",
+            "count": 16,
+            "color": "#3a2f22",
+            "size": 2,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 6,
+            "color": "#7a6444",
+            "size": 1,
+            "alpha": 0.35
+          }
+        ]
+      }
+    },
+    "road": {
+      "id": "road",
+      "name": "ทางเดิน",
+      "solid": false,
+      "speed": 1.15,
+      "footstep": "dirt",
+      "tags": [],
+      "texture": {
+        "base": "#a08761",
+        "palette": [
+          "#93794f",
+          "#ac9469",
+          "#856b45"
+        ],
+        "noise": 0.22,
+        "features": [
+          {
+            "type": "pebble",
+            "count": 12,
+            "color": "#6d573a",
+            "size": 2,
+            "alpha": 0.5
+          },
+          {
+            "type": "speckle",
+            "count": 10,
+            "color": "#c2ac83",
+            "size": 1,
+            "alpha": 0.35
+          }
+        ]
+      }
+    },
+    "magic_ground": {
+      "id": "magic_ground",
+      "name": "พื้นเวทมนตร์",
+      "solid": false,
+      "speed": 1.0,
+      "footstep": "stone",
+      "tags": [],
+      "glow": true,
+      "texture": {
+        "base": "#3d2b58",
+        "palette": [
+          "#35254d",
+          "#463163",
+          "#2c1f42"
+        ],
+        "noise": 0.3,
+        "features": [
+          {
+            "type": "glow_dot",
+            "count": 14,
+            "color": "#a97cff",
+            "size": 2,
+            "alpha": 0.7
+          },
+          {
+            "type": "crack",
+            "count": 5,
+            "color": "#6c4bb0",
+            "size": 3,
+            "alpha": 0.45
+          }
+        ]
+      }
+    }
+  },
+  "props": {
+    "oak_tree": {
+      "id": "oak_tree",
+      "name": "ต้นโอ๊ค",
+      "kind": "tree",
+      "solid": true,
+      "radius": 0.7,
+      "size": 2,
+      "resource": {
+        "item": "wood",
+        "amount": [
+          2,
+          4
+        ],
+        "hp": 5,
+        "tool": "axe"
+      },
+      "render": {
+        "trunk": "#6b4a2b",
+        "leaf": [
+          "#2f6b2f",
+          "#3b7f37",
+          "#478f42"
+        ],
+        "shape": "round"
+      },
+      "spacing": 2
+    },
+    "pine_tree": {
+      "id": "pine_tree",
+      "name": "ต้นสน",
+      "kind": "tree",
+      "solid": true,
+      "radius": 0.6,
+      "size": 2,
+      "resource": {
+        "item": "wood",
+        "amount": [
+          2,
+          4
+        ],
+        "hp": 5,
+        "tool": "axe"
+      },
+      "render": {
+        "trunk": "#5a3f28",
+        "leaf": [
+          "#23503a",
+          "#2b6144",
+          "#1d4531"
+        ],
+        "shape": "cone"
+      },
+      "spacing": 2
+    },
+    "palm_tree": {
+      "id": "palm_tree",
+      "name": "ต้นปาล์ม",
+      "kind": "tree",
+      "solid": true,
+      "radius": 0.5,
+      "size": 2,
+      "resource": {
+        "item": "wood",
+        "amount": [
+          1,
+          3
+        ],
+        "hp": 4,
+        "tool": "axe"
+      },
+      "render": {
+        "trunk": "#8a6a3d",
+        "leaf": [
+          "#3f8a4a",
+          "#4f9c58"
+        ],
+        "shape": "palm"
+      },
+      "spacing": 1
+    },
+    "rock_small": {
+      "id": "rock_small",
+      "name": "ก้อนหิน",
+      "kind": "rock",
+      "solid": false,
+      "radius": 0.4,
+      "size": 1,
+      "resource": {
+        "item": "stone",
+        "amount": [
+          1,
+          2
+        ],
+        "hp": 2,
+        "tool": "pickaxe"
+      },
+      "render": {
+        "base": "#8b8b8f",
+        "shade": "#63636a",
+        "shape": "pebble"
+      }
+    },
+    "rock_big": {
+      "id": "rock_big",
+      "name": "หินก้อนใหญ่",
+      "kind": "rock",
+      "solid": true,
+      "radius": 0.8,
+      "size": 1,
+      "resource": {
+        "item": "stone",
+        "amount": [
+          2,
+          4
+        ],
+        "hp": 4,
+        "tool": "pickaxe"
+      },
+      "render": {
+        "base": "#7d7d84",
+        "shade": "#57575e",
+        "shape": "boulder"
+      },
+      "spacing": 1
+    },
+    "bush_berry": {
+      "id": "bush_berry",
+      "name": "พุ่มเบอร์รี่",
+      "kind": "bush",
+      "solid": false,
+      "radius": 0.4,
+      "size": 1,
+      "resource": {
+        "item": "berry",
+        "amount": [
+          1,
+          3
+        ],
+        "hp": 1,
+        "tool": "hand",
+        "regen": 120
+      },
+      "render": {
+        "base": "#2f6b34",
+        "fruit": "#c8324b",
+        "shape": "bush"
+      }
+    },
+    "herb_plant": {
+      "id": "herb_plant",
+      "name": "สมุนไพร",
+      "kind": "herb",
+      "solid": false,
+      "radius": 0.3,
+      "size": 1,
+      "resource": {
+        "item": "herb",
+        "amount": [
+          1,
+          2
+        ],
+        "hp": 1,
+        "tool": "hand",
+        "regen": 180
+      },
+      "render": {
+        "base": "#4e7d3a",
+        "fruit": "#d8e07a",
+        "shape": "herb"
+      }
+    },
+    "flower_red": {
+      "id": "flower_red",
+      "name": "ดอกไม้แดง",
+      "kind": "deco",
+      "solid": false,
+      "radius": 0.2,
+      "size": 1,
+      "render": {
+        "base": "#3f7a3a",
+        "fruit": "#e0526b",
+        "shape": "flower"
+      }
+    },
+    "flower_blue": {
+      "id": "flower_blue",
+      "name": "ดอกไม้ฟ้า",
+      "kind": "deco",
+      "solid": false,
+      "radius": 0.2,
+      "size": 1,
+      "render": {
+        "base": "#3f7a3a",
+        "fruit": "#6aa8ff",
+        "shape": "flower"
+      }
+    },
+    "reed": {
+      "id": "reed",
+      "name": "กก",
+      "kind": "deco",
+      "solid": false,
+      "radius": 0.25,
+      "size": 1,
+      "render": {
+        "base": "#6b8f3f",
+        "fruit": "#b6a24f",
+        "shape": "reed"
+      }
+    },
+    "cactus": {
+      "id": "cactus",
+      "name": "กระบองเพชร",
+      "kind": "plant",
+      "solid": true,
+      "radius": 0.5,
+      "size": 2,
+      "resource": {
+        "item": "fiber",
+        "amount": [
+          1,
+          3
+        ],
+        "hp": 2,
+        "tool": "hand"
+      },
+      "render": {
+        "base": "#3f7a4a",
+        "shade": "#2f5f39",
+        "shape": "cactus"
+      }
+    },
+    "mushroom": {
+      "id": "mushroom",
+      "name": "เห็ด",
+      "kind": "herb",
+      "solid": false,
+      "radius": 0.25,
+      "size": 1,
+      "resource": {
+        "item": "mushroom",
+        "amount": [
+          1,
+          2
+        ],
+        "hp": 1,
+        "tool": "hand",
+        "regen": 200
+      },
+      "render": {
+        "base": "#cfc7b8",
+        "fruit": "#b03a3a",
+        "shape": "mushroom"
+      }
+    },
+    "ruin_pillar": {
+      "id": "ruin_pillar",
+      "name": "เสาโบราณ",
+      "kind": "structure",
+      "solid": true,
+      "radius": 0.7,
+      "size": 2,
+      "resource": {
+        "item": "stone",
+        "amount": [
+          1,
+          3
+        ],
+        "hp": 6,
+        "tool": "pickaxe"
+      },
+      "render": {
+        "base": "#9c9689",
+        "shade": "#6f6a60",
+        "shape": "pillar"
+      }
+    },
+    "crystal": {
+      "id": "crystal",
+      "name": "ผลึกเวท",
+      "kind": "magic",
+      "solid": true,
+      "radius": 0.5,
+      "size": 2,
+      "glow": true,
+      "resource": {
+        "item": "magic_crystal",
+        "amount": [
+          1,
+          2
+        ],
+        "hp": 4,
+        "tool": "pickaxe",
+        "regen": 600
+      },
+      "render": {
+        "base": "#8a5cff",
+        "shade": "#5c3ac2",
+        "shape": "crystal"
+      }
+    }
+  }
+}

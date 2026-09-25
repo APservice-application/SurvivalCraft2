@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+<meta name="theme-color" content="#0f1a12" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>SurvivalCraft2 — 2D Open World Survival RPG</title>
+<!-- manifest ถูกใส่จาก main.js เฉพาะเมื่อเปิดผ่าน http(s) เพื่อไม่ให้ error ตอนเปิดไฟล์ตรง ๆ -->
+<style>{{CSS}}</style>
+</head>
+<body>
+<div id="app">
+  <canvas id="game"></canvas>
+
+  <!-- ── HUD (Spec ข้อ 33) ── -->
+  <div id="ui">
+    <div class="topbar">
+      <div class="chip" id="chip-time"><span class="ico">🕒</span><span id="txt-time">06:30</span><span class="sub" id="txt-day">วันที่ 1</span></div>
+      <div class="chip" id="chip-weather"><span class="ico">☀</span><span id="txt-weather">แจ่มใส</span></div>
+      <div class="chip" id="chip-biome"><span class="ico">🌿</span><span id="txt-biome">ทุ่งหญ้า</span></div>
+      <div class="chip" id="chip-temp"><span class="ico">🌡</span><span id="txt-temp">22°C</span></div>
+    </div>
+
+    <div class="statbars">
+      <div class="stat" data-stat="hp"><span class="s-ico">❤</span><div class="bar"><i id="bar-hp"></i></div><span class="s-val" id="val-hp">100</span></div>
+      <div class="stat" data-stat="hunger"><span class="s-ico">🍖</span><div class="bar"><i id="bar-hunger"></i></div><span class="s-val" id="val-hunger">100</span></div>
+      <div class="stat" data-stat="thirst"><span class="s-ico">💧</span><div class="bar"><i id="bar-thirst"></i></div><span class="s-val" id="val-thirst">100</span></div>
+      <div class="stat" data-stat="stamina"><span class="s-ico">⚡</span><div class="bar"><i id="bar-stamina"></i></div><span class="s-val" id="val-stamina">100</span></div>
+      <div class="stat" data-stat="mana"><span class="s-ico">✨</span><div class="bar"><i id="bar-mana"></i></div><span class="s-val" id="val-mana">50</span></div>
+    </div>
+
+    <div class="effects" id="effects"></div>
+
+    <div class="minimap-wrap">
+      <canvas id="minimap" width="132" height="132"></canvas>
+      <div class="mm-coord" id="txt-coord">0, 0</div>
+      <div class="mm-biome" id="txt-mmbiome">ทุ่งหญ้า</div>
+    </div>
+
+    <div class="hotbar" id="hotbar"></div>
+
+    <div class="hint" id="hint"></div>
+
+    <div id="toasts"></div>
+
+    <!-- แผง UI -->
+    <div class="panel hidden" id="panel-inventory">
+      <div class="panel-head"><h2>🎒 กระเป๋า / อุปกรณ์</h2><button class="close" data-close="inventory">✕</button></div>
+      <div class="inv-grid" id="inv-grid"></div>
+      <div class="panel-note">ระบบ Inventory เต็มรูปแบบจะมาใน <b>PHASE 4</b> (ตอนนี้แสดงช่องว่างตามสถาปัตยกรรมที่กำหนดไว้)</div>
+    </div>
+
+    <div class="panel hidden" id="panel-map">
+      <div class="panel-head"><h2>🗺 แผนที่โลก</h2><button class="close" data-close="map">✕</button></div>
+      <canvas id="bigmap" width="420" height="420"></canvas>
+      <div class="panel-note" id="map-note">ตำแหน่งปัจจุบัน • เลื่อนดูพื้นที่รอบตัว</div>
+    </div>
+
+    <div class="panel hidden" id="panel-pause">
+      <div class="panel-head"><h2>⏸ หยุดชั่วคราว</h2><button class="close" data-close="pause">✕</button></div>
+      <div class="menu">
+        <button id="btn-resume">▶ เล่นต่อ</button>
+        <button id="btn-save">💾 บันทึกเกม</button>
+        <button id="btn-load">📂 โหลดเกม</button>
+        <button id="btn-new">🌱 โลกใหม่ (สุ่ม seed)</button>
+        <button id="btn-quality">🎚 คุณภาพภาพ: <span id="txt-quality">สูง</span></button>
+      </div>
+      <div class="panel-note" id="pause-info"></div>
+    </div>
+
+    <div class="panel hidden" id="panel-death">
+      <div class="panel-head"><h2>💀 คุณเสียชีวิต</h2></div>
+      <div class="menu">
+        <button id="btn-respawn">เกิดใหม่ที่จุดเกิด</button>
+        <button id="btn-death-load">📂 โหลดเซฟล่าสุด</button>
+      </div>
+      <div class="panel-note" id="death-info"></div>
+    </div>
+
+    <div id="debug" class="hidden"></div>
+  </div>
+
+  <div id="loading">
+    <div class="lbox">
+      <h1>SurvivalCraft2</h1>
+      <p>2D Open World Survival RPG</p>
+      <div class="lbar"><i id="lbar-fill"></i></div>
+      <p class="lstep" id="lstep">กำลังเตรียมโลก…</p>
+    </div>
+  </div>
+</div>
+<script>{{BUNDLE}}</script>
+</body>
+</html>

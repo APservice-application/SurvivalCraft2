@@ -1,0 +1,60 @@
+name: CI — ทดสอบอัตโนมัติ
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Logic + Web + Iframe (Node 20)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: ติดตั้ง dependencies
+        run: npm install --no-audit --no-fund
+      - name: ตรวจว่าข้อมูล shared กับ godot/data ตรงกัน
+        run: |
+          node tools/sync-data.mjs
+          git diff --exit-code godot/data || (echo "::error::godot/data ไม่ตรงกับ shared/data — รัน node tools/sync-data.mjs แล้ว commit" && exit 1)
+      - name: ทดสอบ game logic
+        run: npm test
+      - name: Build เว็บ (ไฟล์เดียว)
+        run: npm run build
+      - name: ติดตั้ง Chrome สำหรับ Puppeteer
+        run: npx puppeteer browsers install chrome
+      - name: ทดสอบในเบราว์เซอร์ (มือถือจำลอง)
+        run: npm run test:browser
+      - name: ทดสอบใน sandboxed iframe
+        run: npm run test:iframe
+      - name: อัปโหลดภาพหน้าจอผลทดสอบ
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: docs/screenshots/
+          if-no-files-found: ignore
+
+  godot:
+    name: Godot headless
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ดาวน์โหลด Godot 4.3 (headless)
+        run: |
+          wget -q https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip -q Godot_v4.3-stable_linux.x86_64.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+          echo "GODOT_BIN=$PWD/Godot_v4.3-stable_linux.x86_64" >> $GITHUB_ENV
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: รันซีนหลักและตรวจ determinism ระหว่าง Web/Godot
+        run: |
+          npm install --no-audit --no-fund
+          npm run test:godot
+          npm run test:determinism

@@ -1,0 +1,29 @@
+{
+  "name": "survivalcraft2",
+  "version": "1.0.0",
+  "description": "2D Top-down Open World Survival RPG (Farming / Crafting / Building / Magic) — Mobile Android first",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node tools/test/logic.test.mjs",
+    "test:browser": "node tools/test/browser.test.mjs",
+    "test:iframe": "node tools/test/iframe.test.mjs",
+    "test:godot": "node tools/test/godot.test.mjs",
+    "test:determinism": "node tools/test/determinism.mjs",
+    "test:all": "npm run test && npm run build && npm run test:browser && npm run test:iframe",
+    "build": "node tools/build-web.mjs",
+    "sync-data": "node tools/sync-data.mjs",
+    "serve": "node tools/serve.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": "true",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "puppeteer": "^24.43.1"
+  }
+}

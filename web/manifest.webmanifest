@@ -1,0 +1,21 @@
+{
+  "name": "SurvivalCraft2 — 2D Open World Survival RPG",
+  "short_name": "SurvivalCraft2",
+  "description": "เกมเอาตัวรอด โลกเปิด 2D: เก็บของ คราฟต์ สร้างบ้าน ปลูกพืช ต่อสู้ ใช้เวทมนตร์",
+  "lang": "th",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0a0f18",
+  "theme_color": "#16281c",
+  "categories": ["games"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><rect width='512' height='512' rx='96' fill='%2316281c'/><text x='256' y='330' font-size='260' text-anchor='middle'>🌱</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

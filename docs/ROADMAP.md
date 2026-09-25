@@ -7,11 +7,11 @@
 
 | Phase | ชื่อ | สถานะ | Checkpoint |
 |---|---|---|---|
-| 0 | Project Foundation | 🟡 กำลังทำ | — |
-| 1 | Player + Camera | ⬜ | |
-| 2 | World + TileMap | ⬜ | |
-| 3 | Biome + Procedural Generation | ⬜ | |
-| 4 | Inventory + Items | ⬜ | |
+| 0 | Project Foundation | ✅ | P00 (2026-09-25) — repo, เอกสาร, CI, ชุดทดสอบ 5 ชุด |
+| 1 | Player + Camera | ✅ | P01 (2026-09-25) — เดิน/วิ่ง/กลิ้งหลบ/ชนกำแพง/กล้อง/มือถือ/HUD/save |
+| 2 | World + TileMap | 🟢 บางส่วน | P02 — chunk streaming + ภูมิประเทศมี texture ครบ (ยังไม่ผูก TileSet ฝั่ง Godot) |
+| 3 | Biome + Procedural Generation | 🟢 บางส่วน | P03 — 15 biome + กฎ decoration/cluster/clearing + determinism ข้าม frontend |
+| 4 | Inventory + Items | ⬜ (ถัดไป) | |
 | 5 | Gathering + Resources | ⬜ | |
 | 6 | Crafting | ⬜ | |
 | 7 | Building | ⬜ | |
@@ -29,7 +29,20 @@
 | 19 | Performance | ⬜ | |
 | 20 | Final QA | ⬜ | |
 
-สัญลักษณ์: ⬜ ยังไม่เริ่ม · 🟡 กำลังทำ · ✅ เสร็จ+ทดสอบแล้ว · 🔴 ติดปัญหา
+สัญลักษณ์: ⬜ ยังไม่เริ่ม · 🟡 กำลังทำ · 🟢 ทำบางส่วน · ✅ เสร็จ+ทดสอบแล้ว · 🔴 ติดปัญหา
+
+### รายละเอียด Phase 1 (สิ่งที่ส่งมอบ + หลักฐาน)
+
+| สิ่งที่ส่งมอบ | หลักฐาน |
+|---|---|
+| ผู้เล่นเดิน/วิ่ง/กลิ้งหลบ + ชนกำแพงแบบไถล | `npm test` → collision, dodge, movement (25/25) |
+| กล้องตามนุ่มนวล + look-ahead + shake + pinch zoom | `npm run test:browser` → glm้องห่างผู้เล่น 0.37 tile |
+| ปุ่มควบคุมมือถือ (จอยสติ๊กลอย + 6 ปุ่ม) | ทดสอบด้วยการจำลองนิ้วสัมผัสจริงใน Chrome |
+| HUD ครบ (HP/หิว/กระหาย/สตามินา/มานา/เวลา/อากาศ/biome/minimap/hotbar) | ภาพใน `docs/screenshots/` |
+| เวลา 7 ช่วง + แสงกลางวัน–กลางคืน + ฝน/พายุ/หมอก/หิมะ | ทดสอบกลางคืน: light 0.12, ตัวเปียกเพิ่ม |
+| Save/Load + autosave | ทดสอบ round-trip (ตำแหน่ง/HP/วัน/seed) |
+| ตรวจ "จอดำ" หลัง newWorld/load/เปลี่ยนคุณภาพ | regression suite 3 กรณี × 3 การตรวจ |
+| Godot frontend รันได้ + โลกตรงกับเว็บ | `npm run test:godot`, `npm run test:determinism` |
 
 ---
 

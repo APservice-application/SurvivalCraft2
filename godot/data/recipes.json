@@ -1,0 +1,47 @@
+{
+  "$comment": "SHARED DATA — Crops (Spec ข้อ 14) + Recipes (Spec ข้อ 15) สำหรับ Phase 6/8",
+  "crops": {
+    "wheat": {
+      "id": "wheat", "name": "ข้าวสาลี", "seed": "wheat_seed", "harvest": "wheat", "yield": [2, 4],
+      "growTimeMinutes": 24, "waterPerStage": 3, "stages": ["seed", "sprout", "young", "growing", "mature", "harvestable"],
+      "tempRange": [8, 32], "soil": ["farmland", "dirt"], "lightNeeded": 0.4,
+      "render": { "seed": "#c9b06a", "sprout": "#7fbf5f", "young": "#5fa845", "growing": "#4c9a3a", "mature": "#d8c47a", "harvestable": "#e8d98a", "height": 0.9 }
+    },
+    "carrot": {
+      "id": "carrot", "name": "แครอท", "seed": "carrot_seed", "harvest": "carrot", "yield": [1, 3],
+      "growTimeMinutes": 16, "waterPerStage": 3, "stages": ["seed", "sprout", "young", "growing", "mature", "harvestable"],
+      "tempRange": [5, 30], "soil": ["farmland", "dirt", "sand"], "lightNeeded": 0.3,
+      "render": { "seed": "#c98a4a", "sprout": "#8fd070", "young": "#6fbf52", "growing": "#54a83c", "mature": "#4a9a34", "harvestable": "#e07a2a", "height": 0.5 }
+    }
+  },
+  "stations": {
+    "hand": { "id": "hand", "name": "มือเปล่า", "radius": 0 },
+    "workbench": { "id": "workbench", "name": "โต๊ะทำงาน", "radius": 3 },
+    "campfire": { "id": "campfire", "name": "กองไฟ", "radius": 3 },
+    "furnace": { "id": "furnace", "name": "เตาหลอม", "radius": 3 },
+    "anvil": { "id": "anvil", "name": "ทั่งเหล็ก", "radius": 3 },
+    "alchemy_table": { "id": "alchemy_table", "name": "โต๊ะเล่นแร่แปรธาตุ", "radius": 3 }
+  },
+  "recipes": [
+    { "id": "wooden_axe", "out": { "item": "wooden_axe", "count": 1 }, "in": [{ "item": "wood", "count": 3 }, { "item": "fiber", "count": 2 }], "station": "hand", "time": 3, "cat": "tools" },
+    { "id": "wooden_pickaxe", "out": { "item": "wooden_pickaxe", "count": 1 }, "in": [{ "item": "wood", "count": 3 }, { "item": "fiber", "count": 2 }], "station": "hand", "time": 3, "cat": "tools" },
+    { "id": "stone_axe", "out": { "item": "stone_axe", "count": 1 }, "in": [{ "item": "wood", "count": 2 }, { "item": "stone", "count": 4 }, { "item": "fiber", "count": 2 }], "station": "workbench", "time": 5, "cat": "tools" },
+    { "id": "stone_pickaxe", "out": { "item": "stone_pickaxe", "count": 1 }, "in": [{ "item": "wood", "count": 2 }, { "item": "stone", "count": 4 }, { "item": "fiber", "count": 2 }], "station": "workbench", "time": 5, "cat": "tools" },
+    { "id": "iron_sword", "out": { "item": "iron_sword", "count": 1 }, "in": [{ "item": "iron", "count": 4 }, { "item": "wood", "count": 2 }], "station": "anvil", "time": 12, "cat": "weapons" },
+    { "id": "wooden_shield", "out": { "item": "wooden_shield", "count": 1 }, "in": [{ "item": "wood", "count": 6 }], "station": "workbench", "time": 8, "cat": "armor" },
+    { "id": "leather_armor", "out": { "item": "leather_armor", "count": 1 }, "in": [{ "item": "fiber", "count": 12 }, { "item": "clay", "count": 2 }], "station": "workbench", "time": 15, "cat": "armor" },
+    { "id": "torch", "out": { "item": "torch", "count": 2 }, "in": [{ "item": "wood", "count": 1 }, { "item": "fiber", "count": 2 }], "station": "hand", "time": 2, "cat": "utility" },
+    { "id": "campfire_kit", "out": { "item": "campfire_kit", "count": 1 }, "in": [{ "item": "wood", "count": 8 }, { "item": "stone", "count": 6 }], "station": "hand", "time": 6, "cat": "building" },
+    { "id": "workbench_kit", "out": { "item": "workbench_kit", "count": 1 }, "in": [{ "item": "wood", "count": 12 }, { "item": "stone", "count": 4 }], "station": "hand", "time": 10, "cat": "building" },
+    { "id": "wall_wood", "out": { "item": "wall_wood", "count": 4 }, "in": [{ "item": "wood", "count": 4 }], "station": "workbench", "time": 4, "cat": "building" },
+    { "id": "floor_wood", "out": { "item": "floor_wood", "count": 6 }, "in": [{ "item": "wood", "count": 4 }], "station": "workbench", "time": 4, "cat": "building" },
+    { "id": "door_wood", "out": { "item": "door_wood", "count": 1 }, "in": [{ "item": "wood", "count": 6 }, { "item": "iron", "count": 1 }], "station": "workbench", "time": 8, "cat": "building" },
+    { "id": "water_flask", "out": { "item": "water_flask", "count": 1 }, "in": [{ "item": "clay", "count": 2 }], "station": "campfire", "time": 4, "cat": "food" },
+    { "id": "bread", "out": { "item": "bread", "count": 1 }, "in": [{ "item": "wheat", "count": 3 }], "station": "campfire", "time": 8, "cat": "food" },
+    { "id": "health_potion", "out": { "item": "health_potion", "count": 1 }, "in": [{ "item": "herb", "count": 3 }, { "item": "berry", "count": 2 }, { "item": "water_flask", "count": 1 }], "station": "alchemy_table", "time": 10, "cat": "medicine" },
+    { "id": "mana_potion", "out": { "item": "mana_potion", "count": 1 }, "in": [{ "item": "mana_herb", "count": 2 }, { "item": "magic_crystal", "count": 1 }, { "item": "water_flask", "count": 1 }], "station": "alchemy_table", "time": 12, "cat": "medicine" },
+    { "id": "spell_scroll_fireball", "out": { "item": "spell_scroll_fireball", "count": 1 }, "in": [{ "item": "magic_crystal", "count": 3 }, { "item": "ancient_relic", "count": 1 }], "station": "alchemy_table", "time": 30, "cat": "magic" },
+    { "id": "iron_ingot", "out": { "item": "iron", "count": 1 }, "in": [{ "item": "ore", "count": 2 }, { "item": "coal", "count": 1 }], "station": "furnace", "time": 10, "cat": "material", "hidden": true }
+  ],
+  "smelting": { "$comment": "alias สำหรับเตาหลอม", "station": "furnace" }
+}

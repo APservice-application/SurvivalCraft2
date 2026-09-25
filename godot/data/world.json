@@ -1,0 +1,179 @@
+{
+  "$comment": "SHARED DATA — World generation config (Spec ข้อ 4, 5, 6, 41). Deterministic จาก seed เดียวกันต้องได้โลกเดียวกัน",
+  "version": 1,
+  "world": {
+    "defaultSeed": 20260925,
+    "chunkSize": 32,
+    "tileSize": 16,
+    "loadRadius": 3,
+    "keepRadius": 5,
+    "maxCachedChunks": 400,
+    "unitsPerTile": 1,
+    "metersPerTile": 1
+  },
+  "terrainNoise": {
+    "continent": {
+      "scale": 0.0055,
+      "octaves": 5,
+      "persistence": 0.5,
+      "lacunarity": 2.0,
+      "offsetX": 1000,
+      "offsetY": 2000
+    },
+    "elevation": {
+      "scale": 0.013,
+      "octaves": 4,
+      "persistence": 0.52,
+      "lacunarity": 2.1,
+      "offsetX": 500,
+      "offsetY": 900
+    },
+    "moisture": {
+      "scale": 0.007,
+      "octaves": 4,
+      "persistence": 0.55,
+      "lacunarity": 2.0,
+      "offsetX": 7000,
+      "offsetY": 100
+    },
+    "temperature": {
+      "scale": 0.0042,
+      "octaves": 3,
+      "persistence": 0.5,
+      "lacunarity": 2.0,
+      "offsetX": -3000,
+      "offsetY": 4200
+    },
+    "detail": {
+      "scale": 0.09,
+      "octaves": 2,
+      "persistence": 0.5,
+      "lacunarity": 2.0,
+      "offsetX": 12,
+      "offsetY": 34
+    }
+  },
+  "thresholds": {
+    "deepWater": 0.2,
+    "water": 0.28,
+    "beach": 0.315,
+    "mountain": 0.6,
+    "snow": 0.72,
+    "rockBlend": 0.055,
+    "beachRowNoise": 0.05
+  },
+  "temperatures": {
+    "polarBelow": 0.24,
+    "coldBelow": 0.36,
+    "temperateBelow": 0.62,
+    "hotAbove": 0.78
+  },
+  "moistureLevels": {
+    "aridBelow": 0.3,
+    "dryBelow": 0.44,
+    "normalBelow": 0.62,
+    "wetBelow": 0.78
+  },
+  "decorRules": {
+    "densityScale": 1.0,
+    "edgeAvoidLiquid": true,
+    "clusterTrees": true,
+    "forestCluster": {
+      "scale": 0.05,
+      "threshold": 0.56,
+      "bonus": 1.7
+    },
+    "clearings": {
+      "scale": 0.021,
+      "threshold": 0.74,
+      "multiplier": 0.45
+    }
+  },
+  "features": {
+    "caves": {
+      "enabled": true,
+      "minElevation": 0.45,
+      "frequency": 0.35,
+      "maxLength": 60,
+      "radius": 2
+    },
+    "rivers": {
+      "enabled": true,
+      "frequency": 0.3,
+      "width": 2.2,
+      "sourceElevation": 0.62
+    },
+    "lakes": {
+      "enabled": true,
+      "frequency": 0.25,
+      "minRadius": 3,
+      "maxRadius": 9
+    },
+    "ruins": {
+      "frequency": 0.1,
+      "minDistance": 48,
+      "size": [
+        4,
+        9
+      ]
+    },
+    "villages": {
+      "frequency": 0.045,
+      "minDistance": 96,
+      "size": [
+        10,
+        18
+      ],
+      "buildRadius": 22
+    }
+  },
+  "time": {
+    "dayLengthMinutes": 16,
+    "startHour": 6.5,
+    "phases": {
+      "dawn": [
+        4.5,
+        6.5
+      ],
+      "morning": [
+        6.5,
+        11
+      ],
+      "noon": [
+        11,
+        14
+      ],
+      "evening": [
+        14,
+        17.5
+      ],
+      "sunset": [
+        17.5,
+        19
+      ],
+      "night": [
+        19,
+        22
+      ],
+      "midnight": [
+        22,
+        28
+      ]
+    }
+  },
+  "weather": {
+    "changeEveryMinutes": 6,
+    "base": "clear",
+    "types": {
+      "clear": 0.4,
+      "cloudy": 0.21,
+      "rain": 0.15,
+      "heavy_rain": 0.07,
+      "storm": 0.035,
+      "fog": 0.055,
+      "wind": 0.03,
+      "snow": 0.07,
+      "heat": 0.04
+    }
+  }
+}

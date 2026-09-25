@@ -1,0 +1,48 @@
+; SurvivalCraft2 — Godot 4.x frontend (dual-frontend architecture)
+; Shared game rules/data อยู่ใน ../shared (ถูกซิงก์เข้าที่ godot/data โดย tools/sync-data.mjs)
+; เป้าหมาย: มือถือ Android เป็นหลัก → ใช้ renderer "mobile"
+
+config_version=5
+
+[application]
+
+config/name="SurvivalCraft2"
+config/description="2D Top-down Open World Survival RPG — Farming / Crafting / Building / Magic"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.3", "Mobile")
+config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.0392157, 0.0588235, 0.0941176, 1)
+
+[autoload]
+
+GameData="*res://scripts/GameData.gd"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+window/vsync/vsync_mode=1
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[rendering]
+
+renderer/rendering_method="mobile"
+renderer/rendering_method.mobile="mobile"
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+environment/defaults/default_clear_color=Color(0.0392157, 0.0588235, 0.0941176, 1)
+
+[physics]
+
+common/physics_ticks_per_second=60
+
+[audio]
+
+buses/default_bus_layout=""

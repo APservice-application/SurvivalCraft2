@@ -1,0 +1,656 @@
+{
+  "$comment": "SHARED DATA — Biome definitions (Spec ข้อ 7). ใช้โดย World Generator ทั้ง Web และ Godot",
+  "biomes": {
+    "deep_ocean": {
+      "id": "deep_ocean",
+      "name": "ทะเลลึก",
+      "terrain": {
+        "deep_water": 1.0
+      },
+      "vegetation": {},
+      "decoration": {},
+      "resources": [],
+      "animals": [
+        "fish"
+      ],
+      "enemies": [],
+      "temperature": 14,
+      "humidity": 1.0,
+      "music": "ocean",
+      "ambient": "waves",
+      "structures": [],
+      "events": [],
+      "color": "#123b63"
+    },
+    "ocean": {
+      "id": "ocean",
+      "name": "ทะเล",
+      "terrain": {
+        "water": 1.0
+      },
+      "vegetation": {},
+      "decoration": {},
+      "resources": [
+        "water_source"
+      ],
+      "animals": [
+        "fish",
+        "crab"
+      ],
+      "enemies": [],
+      "temperature": 18,
+      "humidity": 1.0,
+      "music": "ocean",
+      "ambient": "waves",
+      "structures": [],
+      "events": [],
+      "color": "#1d5d8c"
+    },
+    "beach": {
+      "id": "beach",
+      "name": "หาดทราย",
+      "terrain": {
+        "sand": 0.88,
+        "grass": 0.12
+      },
+      "vegetation": {
+        "palm_tree": 0.018
+      },
+      "decoration": {
+        "reed": 0.05,
+        "rock_small": 0.05,
+        "flower_blue": 0.01
+      },
+      "resources": [
+        "water_source",
+        "clay"
+      ],
+      "animals": [
+        "crab",
+        "seagull"
+      ],
+      "enemies": [],
+      "temperature": 30,
+      "humidity": 0.7,
+      "music": "beach",
+      "ambient": "waves",
+      "structures": [
+        "shipwreck"
+      ],
+      "events": [
+        "treasure"
+      ],
+      "color": "#d9c489"
+    },
+    "grassland": {
+      "id": "grassland",
+      "name": "ทุ่งหญ้า",
+      "terrain": {
+        "grass": 0.82,
+        "dirt": 0.1,
+        "lush_grass": 0.08
+      },
+      "vegetation": {
+        "oak_tree": 0.014
+      },
+      "decoration": {
+        "flower_red": 0.035,
+        "flower_blue": 0.035,
+        "bush_berry": 0.022,
+        "rock_small": 0.022,
+        "herb_plant": 0.016
+      },
+      "resources": [
+        "wood",
+        "stone",
+        "fiber",
+        "herb"
+      ],
+      "animals": [
+        "rabbit",
+        "deer",
+        "bird"
+      ],
+      "enemies": [
+        "slime"
+      ],
+      "temperature": 24,
+      "humidity": 0.5,
+      "music": "plains",
+      "ambient": "birds",
+      "structures": [
+        "camp",
+        "farm_plot"
+      ],
+      "events": [
+        "wandering_merchant"
+      ],
+      "color": "#4c8a3f"
+    },
+    "plains": {
+      "id": "plains",
+      "name": "ที่ราบ",
+      "terrain": {
+        "grass": 0.62,
+        "lush_grass": 0.26,
+        "dirt": 0.12
+      },
+      "vegetation": {
+        "oak_tree": 0.022
+      },
+      "decoration": {
+        "flower_red": 0.04,
+        "flower_blue": 0.04,
+        "bush_berry": 0.035,
+        "herb_plant": 0.028,
+        "rock_small": 0.02
+      },
+      "resources": [
+        "wood",
+        "stone",
+        "fiber",
+        "herb",
+        "berry"
+      ],
+      "animals": [
+        "rabbit",
+        "deer",
+        "boar",
+        "bird"
+      ],
+      "enemies": [
+        "slime",
+        "bandit"
+      ],
+      "temperature": 22,
+      "humidity": 0.6,
+      "music": "plains",
+      "ambient": "birds",
+      "structures": [
+        "farm_plot",
+        "camp",
+        "village"
+      ],
+      "events": [
+        "wandering_merchant",
+        "rare_resource"
+      ],
+      "color": "#5b9648"
+    },
+    "forest": {
+      "id": "forest",
+      "name": "ป่า",
+      "terrain": {
+        "forest_floor": 0.7,
+        "grass": 0.22,
+        "dirt": 0.08
+      },
+      "vegetation": {
+        "oak_tree": 0.085
+      },
+      "decoration": {
+        "mushroom": 0.018,
+        "herb_plant": 0.022,
+        "bush_berry": 0.03,
+        "rock_small": 0.025,
+        "flower_blue": 0.028
+      },
+      "resources": [
+        "wood",
+        "fiber",
+        "herb",
+        "mushroom"
+      ],
+      "animals": [
+        "deer",
+        "boar",
+        "wolf",
+        "bird"
+      ],
+      "enemies": [
+        "wolf",
+        "spider",
+        "bandit"
+      ],
+      "temperature": 19,
+      "humidity": 0.75,
+      "music": "forest",
+      "ambient": "forest",
+      "structures": [
+        "cabin",
+        "ruins"
+      ],
+      "events": [
+        "monster_attack",
+        "rare_resource"
+      ],
+      "color": "#3b6b33"
+    },
+    "deep_forest": {
+      "id": "deep_forest",
+      "name": "ป่าลึก",
+      "terrain": {
+        "forest_floor": 0.86,
+        "mud": 0.14
+      },
+      "vegetation": {
+        "oak_tree": 0.15,
+        "pine_tree": 0.03
+      },
+      "decoration": {
+        "mushroom": 0.028,
+        "herb_plant": 0.028,
+        "rock_big": 0.022
+      },
+      "resources": [
+        "wood",
+        "herb",
+        "mushroom",
+        "rare_wood"
+      ],
+      "animals": [
+        "boar",
+        "wolf"
+      ],
+      "enemies": [
+        "wolf",
+        "spider",
+        "undead"
+      ],
+      "temperature": 17,
+      "humidity": 0.85,
+      "music": "deep_forest",
+      "ambient": "forest",
+      "lightLevel": 0.72,
+      "structures": [
+        "ruins",
+        "witch_hut"
+      ],
+      "events": [
+        "monster_attack",
+        "magical_event"
+      ],
+      "color": "#2d5427"
+    },
+    "swamp": {
+      "id": "swamp",
+      "name": "หนองน้ำ",
+      "terrain": {
+        "mud": 0.52,
+        "water": 0.28,
+        "forest_floor": 0.2
+      },
+      "vegetation": {
+        "oak_tree": 0.02
+      },
+      "decoration": {
+        "reed": 0.1,
+        "mushroom": 0.03,
+        "herb_plant": 0.025
+      },
+      "resources": [
+        "clay",
+        "herb",
+        "mushroom"
+      ],
+      "animals": [
+        "frog",
+        "bird"
+      ],
+      "enemies": [
+        "slime",
+        "undead",
+        "mutant"
+      ],
+      "temperature": 25,
+      "humidity": 0.95,
+      "music": "swamp",
+      "ambient": "insects",
+      "structures": [
+        "ruins"
+      ],
+      "events": [
+        "disease_outbreak"
+      ],
+      "color": "#5b4a34"
+    },
+    "desert": {
+      "id": "desert",
+      "name": "ทะเลทราย",
+      "terrain": {
+        "sand": 0.94,
+        "stone": 0.06
+      },
+      "vegetation": {
+        "cactus": 0.03
+      },
+      "decoration": {
+        "rock_small": 0.06,
+        "rock_big": 0.02,
+        "reed": 0.005
+      },
+      "resources": [
+        "clay",
+        "ore",
+        "fiber"
+      ],
+      "animals": [
+        "lizard",
+        "vulture"
+      ],
+      "enemies": [
+        "bandit",
+        "scorpion"
+      ],
+      "temperature": 42,
+      "humidity": 0.08,
+      "music": "desert",
+      "ambient": "wind",
+      "structures": [
+        "ruins",
+        "oasis"
+      ],
+      "events": [
+        "heatwave",
+        "treasure"
+      ],
+      "color": "#d9c489"
+    },
+    "mountain": {
+      "id": "mountain",
+      "name": "ภูเขา",
+      "terrain": {
+        "stone": 0.68,
+        "rock": 0.24,
+        "dirt": 0.08
+      },
+      "vegetation": {
+        "pine_tree": 0.015
+      },
+      "decoration": {
+        "rock_big": 0.08,
+        "rock_small": 0.06
+      },
+      "resources": [
+        "stone",
+        "ore",
+        "coal",
+        "iron"
+      ],
+      "animals": [
+        "goat"
+      ],
+      "enemies": [
+        "bandit",
+        "mutant",
+        "golem"
+      ],
+      "temperature": 10,
+      "humidity": 0.35,
+      "music": "mountain",
+      "ambient": "wind",
+      "structures": [
+        "mine_entrance",
+        "ruins"
+      ],
+      "events": [
+        "rockfall",
+        "rare_resource"
+      ],
+      "color": "#8b8b8f"
+    },
+    "snow": {
+      "id": "snow",
+      "name": "ทundraหิมะ",
+      "terrain": {
+        "snow": 0.86,
+        "rock": 0.08,
+        "stone": 0.06
+      },
+      "vegetation": {
+        "pine_tree": 0.035
+      },
+      "decoration": {
+        "rock_small": 0.05,
+        "rock_big": 0.03
+      },
+      "resources": [
+        "stone",
+        "ice",
+        "rare_wood"
+      ],
+      "animals": [
+        "wolf",
+        "deer"
+      ],
+      "enemies": [
+        "wolf",
+        "undead",
+        "ice_elemental"
+      ],
+      "temperature": -6,
+      "humidity": 0.55,
+      "music": "snow",
+      "ambient": "wind",
+      "structures": [
+        "ruins",
+        "ice_cave"
+      ],
+      "events": [
+        "blizzard",
+        "boss_event"
+      ],
+      "color": "#e9eef4"
+    },
+    "lake": {
+      "id": "lake",
+      "name": "ทะเลสาบ",
+      "terrain": {
+        "water": 0.62,
+        "sand": 0.2,
+        "grass": 0.18
+      },
+      "vegetation": {
+        "oak_tree": 0.01
+      },
+      "decoration": {
+        "reed": 0.12,
+        "flower_blue": 0.03
+      },
+      "resources": [
+        "water_source",
+        "clay",
+        "fiber"
+      ],
+      "animals": [
+        "fish",
+        "frog",
+        "deer"
+      ],
+      "enemies": [
+        "slime"
+      ],
+      "temperature": 20,
+      "humidity": 0.9,
+      "music": "lake",
+      "ambient": "waves",
+      "structures": [
+        "fishing_hut"
+      ],
+      "events": [
+        "rare_resource"
+      ],
+      "color": "#1d5d8c"
+    },
+    "river": {
+      "id": "river",
+      "name": "แม่น้ำ",
+      "terrain": {
+        "water": 0.7,
+        "sand": 0.18,
+        "grass": 0.12
+      },
+      "vegetation": {
+        "oak_tree": 0.015
+      },
+      "decoration": {
+        "reed": 0.1,
+        "rock_small": 0.04
+      },
+      "resources": [
+        "water_source",
+        "clay",
+        "fiber"
+      ],
+      "animals": [
+        "fish",
+        "frog",
+        "boar"
+      ],
+      "enemies": [
+        "slime",
+        "bandit"
+      ],
+      "temperature": 21,
+      "humidity": 0.85,
+      "music": "river",
+      "ambient": "waves",
+      "structures": [
+        "bridge"
+      ],
+      "events": [
+        "treasure"
+      ],
+      "color": "#1d5d8c"
+    },
+    "ruins": {
+      "id": "ruins",
+      "name": "ซากปรักหักพัง",
+      "terrain": {
+        "stone": 0.52,
+        "dirt": 0.18,
+        "grass": 0.3
+      },
+      "vegetation": {
+        "oak_tree": 0.015
+      },
+      "decoration": {
+        "ruin_pillar": 0.14,
+        "rock_big": 0.06,
+        "rock_small": 0.05,
+        "herb_plant": 0.02
+      },
+      "resources": [
+        "stone",
+        "iron",
+        "ancient_relic"
+      ],
+      "animals": [],
+      "enemies": [
+        "undead",
+        "bandit",
+        "golem"
+      ],
+      "temperature": 18,
+      "humidity": 0.4,
+      "music": "ruins",
+      "ambient": "eerie",
+      "structures": [
+        "ruins",
+        "dungeon_entrance"
+      ],
+      "events": [
+        "boss_event",
+        "treasure",
+        "magical_event"
+      ],
+      "color": "#8b8b8f"
+    },
+    "magical_area": {
+      "id": "magical_area",
+      "name": "เขตเวทมนตร์",
+      "terrain": {
+        "magic_ground": 0.62,
+        "lush_grass": 0.24,
+        "stone": 0.14
+      },
+      "vegetation": {
+        "oak_tree": 0.02
+      },
+      "decoration": {
+        "crystal": 0.08,
+        "flower_blue": 0.06,
+        "herb_plant": 0.05
+      },
+      "resources": [
+        "magic_crystal",
+        "mana_herb",
+        "ancient_relic"
+      ],
+      "animals": [
+        "spirit_fox"
+      ],
+      "enemies": [
+        "magic_construct",
+        "elemental"
+      ],
+      "temperature": 16,
+      "humidity": 0.6,
+      "music": "magic",
+      "ambient": "magic",
+      "glow": true,
+      "lightLevel": 0.85,
+      "structures": [
+        "ley_shrine",
+        "ruins"
+      ],
+      "events": [
+        "magical_event",
+        "rare_resource",
+        "boss_event"
+      ],
+      "color": "#3d2b58"
+    },
+    "cave": {
+      "id": "cave",
+      "name": "ถ้ำ",
+      "terrain": {
+        "rock": 0.7,
+        "stone": 0.3
+      },
+      "vegetation": {},
+      "decoration": {
+        "crystal": 0.04,
+        "rock_small": 0.05
+      },
+      "resources": [
+        "stone",
+        "ore",
+        "iron",
+        "coal",
+        "magic_crystal"
+      ],
+      "animals": [
+        "bat"
+      ],
+      "enemies": [
+        "spider",
+        "undead",
+        "golem"
+      ],
+      "temperature": 12,
+      "humidity": 0.5,
+      "music": "cave",
+      "ambient": "drip",
+      "lightLevel": 0.25,
+      "structures": [
+        "dungeon_entrance"
+      ],
+      "events": [
+        "boss_event",
+        "monster_attack"
+      ],
+      "color": "#5f5f66"
+    }
+  }
+}
