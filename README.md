@@ -1,5 +1,9 @@
 # SurvivalCraft2 🌱⚔️✨
 
+[![CI](https://github.com/APservice-application/SurvivalCraft2/actions/workflows/ci.yml/badge.svg)](https://github.com/APservice-application/SurvivalCraft2/actions/workflows/ci.yml)
+[![Deploy](https://github.com/APservice-application/SurvivalCraft2/actions/workflows/pages.yml/badge.svg)](https://github.com/APservice-application/SurvivalCraft2/actions/workflows/pages.yml)
+[![เล่นเลย](https://img.shields.io/badge/เล่นเลย-GitHub%20Pages-3fae6a)](https://apservice-application.github.io/SurvivalCraft2/)
+
 **2D Top-down Open World Survival RPG** — เอาตัวรอด · ฟาร์ม · คราฟต์ · สร้างฐาน · เวทมนตร์
 เป้าหมายหลัก: **เล่นบนมือถือ Android เป็นหลัก** (Mobile-first) · **Offline-first** · ไม่บังคับล็อกอิน
 
