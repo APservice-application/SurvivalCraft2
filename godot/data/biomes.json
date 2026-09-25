@@ -7,8 +7,8 @@
       "terrain": {
         "deep_water": 1.0
       },
-      "vegetation": [],
-      "decoration": [],
+      "vegetation": {},
+      "decoration": {},
       "resources": [],
       "animals": [
         "fish"
@@ -28,8 +28,8 @@
       "terrain": {
         "water": 1.0
       },
-      "vegetation": [],
-      "decoration": [],
+      "vegetation": {},
+      "decoration": {},
       "resources": [
         "water_source"
       ],
@@ -618,7 +618,7 @@
         "rock": 0.7,
         "stone": 0.3
       },
-      "vegetation": [],
+      "vegetation": {},
       "decoration": {
         "crystal": 0.04,
         "rock_small": 0.05
