@@ -1,0 +1,1478 @@
+GAME MASTER ARCHITECTURE
+
+2D OPEN WORLD SURVIVAL RPG / FARMING / CRAFTING / BUILDING / MAGIC
+
+---
+
+0. CORE VISION
+
+สร้างเกม 2D Top-down Open World Survival RPG ที่ผู้เล่นสามารถใช้ชีวิต สำรวจ เอาตัวรอด สร้างบ้าน ปลูกพืช เก็บทรัพยากร Craft อุปกรณ์ ต่อสู้กับศัตรู ใช้เวทมนตร์ และพัฒนาโลกของตัวเองได้อย่างอิสระ
+
+เกมต้องให้ความรู้สึกว่าเป็น "โลกที่มีชีวิต" ไม่ใช่แค่ฉากที่สร้างขึ้นมาเพื่อเดินผ่าน
+
+ผู้เล่นสามารถเลือกวิธีเล่นของตัวเองได้ เช่น
+
+- นักสำรวจ
+- นักทำฟาร์ม
+- นักสร้างบ้าน
+- นักคราฟต์
+- นักล่า
+- นักรบ
+- นักเวท
+- นักเก็บทรัพยากร
+- นักค้าขาย
+- นักผจญภัย
+
+ไม่มีเส้นทางการเล่นเพียงแบบเดียว
+
+---
+
+1. TECHNOLOGY PRINCIPLE
+
+IMPORTANT:
+
+เกมนี้จะไม่สร้าง Game Engine ขึ้นมาใหม่
+
+ใช้ Game Engine ที่มีอยู่แล้วเป็น Runtime และ Rendering Foundation
+
+ENGINE:
+
+- Godot เป็นตัวเลือกหลัก
+- Engine ต้องรองรับ 2D TileMap/TileSet
+- Terrain / Autotiling
+- Animation
+- Physics
+- Collision
+- Navigation
+- Audio
+- Particles/VFX
+- Scene system
+- Resource system
+- Input system
+- Save/Load
+- Scripting
+
+AI มีหน้าที่สร้าง "เกมบน Engine"
+
+AI ไม่มีหน้าที่สร้าง:
+
+- Renderer ใหม่
+- Physics Engine ใหม่
+- Tile Engine ใหม่
+- Scene Engine ใหม่
+- Audio Engine ใหม่
+- Animation Engine ใหม่
+- Game Engine ใหม่
+
+หาก Engine มีระบบอยู่แล้ว ต้องใช้ระบบของ Engine ก่อนเสมอ
+
+---
+
+2. AI DEVELOPMENT PRINCIPLE
+
+AI Arena เป็นผู้พัฒนาเกม
+
+AI ต้องทำงานผ่านระบบที่ตรวจสอบได้:
+
+AI
+↓
+Game Design
+↓
+Architecture
+↓
+Engine API / Editor
+↓
+Game Systems
+↓
+Assets
+↓
+Scenes
+↓
+Testing
+↓
+Playable Build
+
+AI ต้องไม่สร้างระบบซ้ำกับ Engine หาก Engine มีความสามารถนั้นอยู่แล้ว
+
+---
+
+3. GAME GENRE
+
+Primary:
+
+2D Top-down Open World Survival RPG
+
+Secondary:
+
+- Survival
+- Sandbox
+- Farming
+- Crafting
+- Building
+- Exploration
+- Action RPG
+- Magic
+- Adventure
+- Procedural World
+
+---
+
+4. WORLD ARCHITECTURE
+
+โลกเป็น Open World ที่สร้างจาก Seed
+
+WORLD
+├── World Seed
+├── World Generator
+├── Biome Generator
+├── Terrain Generator
+├── Resource Generator
+├── Structure Generator
+├── NPC Generator
+├── Enemy Generator
+├── Event Generator
+└── Chunk Streaming
+
+โลกต้องสามารถสร้างใหม่จาก Seed เดิมได้
+
+Seed เดิมต้องให้โลกเหมือนเดิมในระดับ deterministic ที่กำหนดไว้
+
+---
+
+5. WORLD STRUCTURE
+
+World
+└── Region
+└── Biome
+└── Chunk
+└── Tile Layer
+└── Object Layer
+└── Resource Layer
+└── Entity Layer
+└── Building Layer
+└── NPC Layer
+└── Effect Layer
+
+---
+
+6. CHUNK SYSTEM
+
+โลกขนาดใหญ่ไม่ควรถูกโหลดทั้งหมดพร้อมกัน
+
+ใช้ระบบ Chunk Streaming
+
+ตัวอย่าง:
+
+Active Chunk
+Nearby Chunks
+Loaded Chunks
+Unloaded Chunks
+
+เมื่อผู้เล่นเดิน:
+
+โหลด Chunk ใหม่
+↓
+สร้าง Entity
+↓
+โหลด Resource
+↓
+โหลด Building
+↓
+โหลด NPC
+↓
+เริ่ม Simulation
+
+เมื่อออกจากระยะ:
+
+บันทึก State
+↓
+หยุด Simulation ที่ไม่จำเป็น
+↓
+Unload
+
+---
+
+7. BIOME SYSTEM
+
+Biome ตัวอย่าง:
+
+- Grassland
+- Forest
+- Deep Forest
+- Plains
+- Desert
+- Swamp
+- Mountain
+- Snow
+- Beach
+- River
+- Lake
+- Cave
+- Ruins
+- Magical Area
+
+แต่ละ Biome ต้องมี:
+
+Terrain
+Vegetation
+Resources
+Animals
+Enemies
+Weather
+Temperature
+Structures
+Music
+Ambient Effects
+Special Events
+
+---
+
+8. TERRAIN SYSTEM
+
+โลกต้องไม่ดูเป็นสี่เหลี่ยมสีเดียว
+
+ต้องใช้ TileSet + Terrain + Autotiling
+
+Terrain:
+
+Grass
+Dirt
+Sand
+Stone
+Mud
+Water
+Snow
+Road
+Rock
+Forest Floor
+
+ระบบต้องรองรับ:
+
+- Center Tile
+- Edge Tile
+- Corner Tile
+- Transition Tile
+- Variant Tile
+- Animated Tile
+- Randomized Tile
+
+ตัวอย่าง:
+
+Grass → Dirt
+Grass → Sand
+Grass → Water
+Dirt → Road
+Sand → Water
+
+ต้องสร้าง transition อัตโนมัติ
+
+---
+
+9. VISUAL QUALITY RULE
+
+ห้ามใช้สีพื้นเรียบ ๆ แทน Texture หากมี Asset/TileSet ที่เหมาะสม
+
+ห้ามสร้างโลกเป็น:
+
+GREEN SQUARE + GREEN SQUARE + GREEN SQUARE
+
+ต้องมี:
+
+- Texture Variation
+- Edge Variation
+- Random Decoration
+- Grass Details
+- Small Rocks
+- Flowers
+- Dirt Variation
+- Footpaths
+- Environmental Props
+- Lighting
+- Shadows
+- VFX
+
+โลกต้องมี visual hierarchy
+
+---
+
+10. PLAYER SYSTEM
+
+Player:
+
+- Movement
+- Sprint
+- Dodge
+- Interaction
+- Inventory
+- Equipment
+- Health
+- Hunger
+- Thirst
+- Stamina
+- Temperature
+- Status Effects
+- Combat
+- Magic
+- Crafting
+- Building
+- Farming
+- Gathering
+
+---
+
+11. SURVIVAL SYSTEM
+
+Core survival stats:
+
+HP
+Hunger
+Thirst
+Stamina
+Temperature
+Energy
+Sleep
+
+Status Effects:
+
+- Poison
+- Bleeding
+- Burning
+- Frozen
+- Wet
+- Hungry
+- Dehydrated
+- Exhausted
+- Disease
+- Buff
+- Debuff
+
+ทุกระบบต้องเชื่อมต่อกัน
+
+ตัวอย่าง:
+
+ฝนตก
+→ ตัวเปียก
+→ Temperature ลด
+→ ถ้าอากาศหนาว
+→ เสี่ยง Hypothermia
+
+---
+
+12. DAY/NIGHT SYSTEM
+
+ระบบเวลา:
+
+Day
+Dawn
+Morning
+Noon
+Evening
+Sunset
+Night
+Midnight
+
+เวลาอาจส่งผลต่อ:
+
+- NPC
+- Animals
+- Enemies
+- Farming
+- Temperature
+- Visibility
+- Events
+- Magic
+- Spawn
+
+---
+
+13. WEATHER SYSTEM
+
+Weather:
+
+- Clear
+- Cloudy
+- Rain
+- Heavy Rain
+- Storm
+- Fog
+- Snow
+- Heat
+- Wind
+
+Weather ส่งผลต่อโลกจริง
+
+ตัวอย่าง:
+
+Rain
+→ Water source เพิ่ม
+→ Soil moisture เพิ่ม
+→ Movement บางพื้นที่ช้าลง
+→ Visibility ลด
+→ บาง Enemy/NPC เปลี่ยนพฤติกรรม
+
+---
+
+14. FARMING SYSTEM
+
+Farming เป็นระบบหลัก
+
+Flow:
+
+Prepare Soil
+↓
+Plant Seed
+↓
+Water
+↓
+Growth
+↓
+Mature
+↓
+Harvest
+↓
+Repeat
+
+Plant Data:
+
+Seed
+Growth Time
+Growth Stages
+Water Requirement
+Temperature Requirement
+Season
+Soil Requirement
+Yield
+Quality
+Special Properties
+
+Growth Stage:
+
+Seed
+↓
+Sprout
+↓
+Young
+↓
+Growing
+↓
+Mature
+↓
+Harvestable
+
+---
+
+15. CRAFTING SYSTEM
+
+Crafting Categories:
+
+- Tools
+- Weapons
+- Armor
+- Food
+- Medicine
+- Farming
+- Building
+- Furniture
+- Magic
+- Machines
+- Utility Items
+
+Recipe:
+
+Ingredients
++
+Tools
++
+Station
++
+Time
+
+Item
+
+---
+
+16. BUILDING SYSTEM
+
+ผู้เล่นสามารถสร้าง:
+
+- Floor
+- Wall
+- Door
+- Window
+- Roof
+- Fence
+- Storage
+- Workbench
+- Furnace
+- Farm
+- House
+- Workshop
+- Defensive Structure
+
+Building ต้องรองรับ:
+
+Place
+Rotate
+Remove
+Move
+Upgrade
+Repair
+
+---
+
+17. RESOURCE SYSTEM
+
+Resources:
+
+Wood
+Stone
+Ore
+Clay
+Fiber
+Herbs
+Food
+Water
+Rare Materials
+Magical Materials
+
+Resource Nodes:
+
+Tree
+Rock
+Ore Vein
+Plant
+Bush
+Herb
+Water Source
+
+Resources ต้องมี Respawn/Regeneration ตามกฎของโลก
+
+---
+
+18. INVENTORY SYSTEM
+
+Inventory ต้องรองรับ:
+
+- Stack
+- Weight
+- Item Type
+- Quality
+- Durability
+- Equipment
+- Hotbar
+- Storage
+- Chest
+- Backpack
+
+Item Data:
+
+ID
+Name
+Category
+Icon
+Stack Size
+Weight
+Value
+Durability
+Properties
+Recipe
+Effects
+
+---
+
+19. EQUIPMENT SYSTEM
+
+Equipment:
+
+- Weapon
+- Shield
+- Helmet
+- Armor
+- Gloves
+- Boots
+- Ring
+- Amulet
+- Tool
+
+Equipment อาจมี:
+
+Stats
+Durability
+Rarity
+Modifiers
+Enchantments
+Magic Effects
+
+---
+
+20. COMBAT SYSTEM
+
+Combat:
+
+Melee
+Ranged
+Magic
+
+Melee:
+
+Sword
+Axe
+Spear
+Hammer
+Dagger
+
+Ranged:
+
+Bow
+Crossbow
+Magic Projectile
+
+Combat ต้องรองรับ:
+
+Damage
+Defense
+Critical
+Knockback
+Status Effect
+Element
+Cooldown
+Stamina Cost
+
+---
+
+21. MAGIC SYSTEM
+
+Magic เป็นระบบสำคัญของเกม
+
+Magic Categories:
+
+Fire
+Water
+Earth
+Wind
+Ice
+Lightning
+Nature
+Light
+Dark
+Arcane
+
+Spell Structure:
+
+Spell
+├── Element
+├── Damage
+├── Range
+├── Area
+├── Mana Cost
+├── Cooldown
+├── Cast Time
+├── Projectile
+├── Effect
+└── Upgrade
+
+ตัวอย่าง:
+
+Fireball
+Ice Spike
+Lightning Strike
+Heal
+Shield
+Teleport
+Summon
+Fire Wall
+Freeze
+Dark Curse
+
+เวทสามารถพัฒนาและปลดล็อกได้
+
+---
+
+22. MAGIC PROGRESSION
+
+ผู้เล่นสามารถ:
+
+Learn Spell
+↓
+Use Spell
+↓
+Gain Experience
+↓
+Upgrade Spell
+↓
+Unlock Advanced Spell
+
+อาจมี:
+
+Magic Skill Tree
+Element Skill Tree
+Passive Magic
+Spell Combination
+
+---
+
+23. NPC SYSTEM
+
+NPC ต้องมี:
+
+Identity
+Name
+Role
+Schedule
+Needs
+Relationship
+Dialogue
+Quest
+Inventory
+Shop
+Location
+Faction
+
+NPC Schedule:
+
+Morning
+→ Work
+
+Afternoon
+→ Shop
+
+Evening
+→ Return Home
+
+Night
+→ Sleep
+
+---
+
+24. QUEST SYSTEM
+
+Quest Types:
+
+- Main Quest
+- Side Quest
+- Exploration
+- Gathering
+- Hunting
+- Farming
+- Crafting
+- Escort
+- Combat
+- Discovery
+- Magic
+
+Quest State:
+
+Locked
+Available
+Active
+Completed
+Failed
+
+---
+
+25. ENEMY SYSTEM
+
+Enemy Categories:
+
+Animals
+Monsters
+Undead
+Bandits
+Mutants
+Magical Creatures
+Bosses
+
+Enemy AI:
+
+Idle
+Patrol
+Detect
+Chase
+Attack
+Flee
+Search
+Return
+Sleep
+
+ศัตรูต้องมีความแตกต่างด้านพฤติกรรม ไม่ใช่แค่เปลี่ยน Sprite
+
+---
+
+26. ANIMAL SYSTEM
+
+Animals:
+
+- Passive
+- Neutral
+- Aggressive
+
+ระบบรองรับ:
+
+Wandering
+Eating
+Sleeping
+Fleeing
+Breeding
+Spawning
+Migration
+
+---
+
+27. WORLD EVENTS
+
+Dynamic Events:
+
+- Monster Attack
+- Bandit Raid
+- Weather Event
+- Treasure
+- Merchant
+- Wandering NPC
+- Magical Event
+- Rare Resource
+- Boss Event
+
+Event ต้องสามารถเกิดขึ้นตามเงื่อนไขของโลก
+
+---
+
+28. ECONOMY SYSTEM
+
+NPC และเมืองสามารถมี Economy
+
+Items มี:
+
+Buy Price
+Sell Price
+Demand
+Supply
+
+ราคาสามารถเปลี่ยนตาม:
+
+- Supply
+- Demand
+- Region
+- Event
+- Season
+
+---
+
+29. AUDIO SYSTEM
+
+ต้องมี:
+
+BGM
+Ambient
+Footsteps
+Combat
+Weapons
+Magic
+Animals
+UI
+Environment
+
+เสียงต้องเปลี่ยนตาม:
+
+Biome
+Weather
+Time
+Combat
+Location
+
+---
+
+30. VFX SYSTEM
+
+VFX:
+
+- Weather
+- Fire
+- Smoke
+- Water
+- Magic
+- Hit
+- Explosion
+- Dust
+- Leaves
+- Particles
+- Environment
+
+ต้องใช้ Engine Particle System เมื่อเหมาะสม ไม่สร้างระบบ Particle Engine ใหม่
+
+---
+
+31. CAMERA SYSTEM
+
+Top-down Camera:
+
+- Smooth Follow
+- Zoom
+- Camera Bounds
+- Shake
+- Combat Focus
+- Map View
+
+ต้องเหมาะกับมือถือ
+
+---
+
+32. MOBILE CONTROL
+
+เป้าหมายหลักคือ Mobile
+
+Controls:
+
+Virtual Joystick
+Attack
+Interact
+Dash
+Inventory
+Map
+Build
+Magic
+Hotbar
+
+ปุ่มต้อง:
+
+- กดง่าย
+- ไม่บังเกม
+- รองรับมือเดียว/สองมือ
+- ปรับตำแหน่งได้ในอนาคต
+
+---
+
+33. UI ARCHITECTURE
+
+UI:
+
+HUD
+Inventory
+Equipment
+Crafting
+Building
+Farming
+Map
+Quest
+Character
+Magic
+Settings
+Save/Load
+
+HUD:
+
+HP
+Hunger
+Thirst
+Stamina
+Mana
+Hotbar
+Mini Map
+Time
+Weather
+
+UI ต้องออกแบบเป็นระบบเดียวกันทั้งหมด
+
+---
+
+34. MAP SYSTEM
+
+Map:
+
+World Map
+Region Map
+Local Map
+
+แสดง:
+
+Player
+NPC
+Quest
+Village
+Resource
+Dungeon
+Point of Interest
+
+Fog of War:
+
+Unknown
+Discovered
+Explored
+
+---
+
+35. SAVE SYSTEM
+
+Save:
+
+World Seed
+Player
+Inventory
+Equipment
+Buildings
+Farms
+NPC State
+Quest State
+World Events
+Resources
+Time
+Weather
+Magic Progression
+
+Save ต้องสามารถโหลดกลับมาโดยไม่ทำให้ World State เสียหาย
+
+---
+
+36. DATA-DRIVEN ARCHITECTURE
+
+ระบบเกมควรเป็น Data Driven
+
+ไม่ hard-code ทุกอย่างไว้ใน script
+
+ตัวอย่าง:
+
+Item Data
+Weapon Data
+Enemy Data
+NPC Data
+Recipe Data
+Crop Data
+Spell Data
+Biome Data
+Building Data
+Quest Data
+
+เพิ่ม Content ใหม่ได้โดยไม่ต้องแก้ Core System มากเกินไป
+
+---
+
+37. MODULAR GAME ARCHITECTURE
+
+ระบบต้องแยก Module:
+
+Core
+World
+Player
+Survival
+Inventory
+Items
+Crafting
+Building
+Farming
+Combat
+Magic
+NPC
+Quest
+AI
+Economy
+Weather
+Time
+Audio
+VFX
+UI
+Save
+Settings
+
+แต่ละ Module ต้องมี Interface ที่ชัดเจน
+
+---
+
+38. ENGINE VS GAME SEPARATION
+
+ENGINE:
+
+Rendering
+Physics
+Input
+Scene
+Animation
+Audio
+TileMap
+Navigation
+Particles
+Resource Loading
+
+GAME:
+
+Survival
+Farming
+Crafting
+Magic
+Combat
+Quest
+NPC
+Economy
+World Rules
+Progression
+
+ห้ามนำ Game Logic ไปสร้าง Engine ใหม่
+
+---
+
+39. ASSET PIPELINE
+
+Asset Sources:
+
+1. Open Source Assets
+2. CC0 Assets
+3. Licensed Assets
+4. Custom Assets
+5. AI Generated Assets
+
+ทุก Asset ต้องตรวจ:
+
+License
+Resolution
+Style
+Format
+Performance
+Consistency
+
+---
+
+40. ART STYLE
+
+กำหนด Visual Style ก่อนผลิต Asset จำนวนมาก
+
+ต้องมี Style Guide:
+
+Character Style
+Environment Style
+Tile Size
+Color Palette
+Lighting
+Shadow
+UI Style
+Animation Style
+VFX Style
+
+ห้ามนำ Asset หลายสไตล์มาปะปนกันโดยไม่มีการปรับให้เข้ากัน
+
+---
+
+41. WORLD VISUAL QUALITY
+
+ห้ามใช้ procedural generation เพียงอย่างเดียวจนโลกดูเหมือน random blocks
+
+Procedural World ต้องมี:
+
+Noise
+Rules
+Biome Rules
+Decoration Rules
+Structure Rules
+Path Rules
+Resource Rules
+Landmark Rules
+
+World Generation:
+
+Terrain
+↓
+Biome
+↓
+Road/Water
+↓
+Structures
+↓
+Vegetation
+↓
+Resources
+↓
+NPC
+↓
+Decoration
+↓
+Dynamic Events
+
+---
+
+42. PERFORMANCE
+
+Target:
+
+Mobile-first
+
+ต้องรองรับมือถือระดับกลางและเครื่องสเปกต่ำให้ได้ดีที่สุด
+
+Optimization:
+
+Chunk Streaming
+Object Pooling
+Entity Culling
+Texture Atlas
+Sprite Batching
+LOD เมื่อเหมาะสม
+Background Simulation
+Limited Active AI
+Memory Management
+
+ห้ามโหลดโลกทั้งหมดเข้า RAM
+
+---
+
+43. OFFLINE-FIRST
+
+เกมหลักต้องเล่น Offline ได้
+
+ไม่ควรบังคับ:
+
+Login
+Cloud
+Internet
+Server
+
+สำหรับ Single Player
+
+Internet เป็น Optional Layer สำหรับ:
+
+Updates
+Cloud Save
+Multiplayer
+Content Download
+Analytics ถ้ามีและผู้ใช้ยินยอม
+
+---
+
+44. MULTIPLAYER FUTURE
+
+Architecture ต้องไม่ปิดทาง Multiplayer
+
+แต่ไม่สร้าง Multiplayer ก่อนจนกว่า Single Player จะเสถียร
+
+Future:
+
+LAN
+Online
+Co-op
+Dedicated Server
+
+Game Logic ที่สำคัญควรแยกจาก UI เพื่อให้ต่อยอด Network ได้
+
+---
+
+45. AI DEVELOPMENT WORKFLOW
+
+AI Arena ต้องพัฒนาแบบ Phase
+
+ไม่สั่งให้ AI สร้างทุกระบบพร้อมกัน
+
+PHASE 0
+Project Foundation
+
+PHASE 1
+Player + Camera
+
+PHASE 2
+World + TileMap
+
+PHASE 3
+Biome + Procedural Generation
+
+PHASE 4
+Inventory + Items
+
+PHASE 5
+Gathering + Resources
+
+PHASE 6
+Crafting
+
+PHASE 7
+Building
+
+PHASE 8
+Farming
+
+PHASE 9
+Survival
+
+PHASE 10
+Combat
+
+PHASE 11
+Enemy AI
+
+PHASE 12
+Magic
+
+PHASE 13
+NPC
+
+PHASE 14
+Quest
+
+PHASE 15
+Economy
+
+PHASE 16
+Events
+
+PHASE 17
+Save/Load
+
+PHASE 18
+UI/UX Polish
+
+PHASE 19
+Performance
+
+PHASE 20
+Final QA
+
+---
+
+46. AI CHECKPOINT SYSTEM
+
+ทุก Phase ต้องมี:
+
+Implementation
+Testing
+Validation
+Checkpoint
+
+ห้ามเริ่ม Phase ใหม่หาก Core ของ Phase ก่อนหน้ายังพัง
+
+แต่ไม่จำเป็นต้อง Build/ตรวจทุกไฟล์ทุกครั้ง
+
+ให้ AI สามารถ:
+
+Implement Batch
+↓
+Run Tests
+↓
+Run Build
+↓
+Inspect Errors
+↓
+Fix
+↓
+Checkpoint
+
+---
+
+47. GAME DEVELOPMENT RULE
+
+AI ต้องไม่ทำงานแบบ:
+
+"สร้างอะไรก็ได้ให้เกมดูเหมือนเสร็จ"
+
+ต้องทำงานแบบ:
+
+Specification
+→ Architecture
+→ Implementation
+→ Integration
+→ Testing
+→ Playtest
+→ Validation
+
+---
+
+48. DEFINITION OF DONE
+
+Feature จะถือว่าเสร็จเมื่อ:
+
+- Code ทำงาน
+- เชื่อมกับระบบที่เกี่ยวข้อง
+- UI มีจริง
+- Error Handling มี
+- Save/Load รองรับเมื่อจำเป็น
+- Mobile Input รองรับเมื่อจำเป็น
+- Performance ผ่านเกณฑ์
+- ทดสอบแล้ว
+- ไม่ทำระบบอื่นพัง
+
+ห้ามถือว่าเสร็จเพียงเพราะ Compile ผ่าน
+
+---
+
+49. CORE GAME LOOP
+
+ผู้เล่น:
+
+Explore
+↓
+Gather
+↓
+Survive
+↓
+Craft
+↓
+Build
+↓
+Farm
+↓
+Fight
+↓
+Discover
+↓
+Gain Resources
+↓
+Upgrade
+↓
+Explore Further
+↓
+Encounter Stronger Challenges
+↓
+Develop Character / Base / World
+
+Loop นี้ต้องสามารถดำเนินต่อไปได้อย่างอิสระ
+
+---
+
+50. LONG-TERM VISION
+
+เกมต้องสามารถขยายได้ในอนาคตโดยไม่ต้อง Rewrite Core Engine
+
+สามารถเพิ่ม:
+
+New Biomes
+New Crops
+New Items
+New Weapons
+New Magic
+New Enemies
+New NPC
+New Quests
+New Buildings
+New Bosses
+New Events
+New Regions
+New Dungeons
+New Story Content
+
+โดยใช้ระบบเดิม
+
+---
+
+FINAL PRINCIPLE
+
+นี่คือเกม ไม่ใช่ Game Engine
+
+Engine มีหน้าที่:
+
+"ทำให้เกมทำงาน"
+
+Game Architecture มีหน้าที่:
+
+"กำหนดว่าเกมทำอะไร"
+
+AI มีหน้าที่:
+
+"สร้างและพัฒนาเกมตาม Architecture"
+
+ผู้พัฒนาเป็นผู้กำหนด:
+
+Vision
+Rules
+Features
+Art Direction
+Gameplay Direction
+
+AI ห้ามเปลี่ยน Core Vision เอง
+
+หากพบว่าระบบใดต้องสร้าง Engine ใหม่ ให้หยุดและตรวจสอบก่อนว่า Engine ที่ใช้อยู่มีระบบรองรับอยู่แล้วหรือไม่
+
+เป้าหมายสุดท้ายคือ:
+
+2D Open World Survival RPG ที่มีโลกที่มีชีวิต มีการสำรวจ เอาตัวรอด ปลูกผัก Craft สร้างบ้าน ต่อสู้ ใช้เวทมนตร์ และพัฒนาโลกของผู้เล่นได้อย่างอิสระ โดยใช้ Game Engine ที่มีอยู่แล้วเป็นพื้นฐาน และให้ AI Arena เป็นผู้ช่วยพัฒนาเกมแบบครบวงจร

@@ -1,0 +1,54 @@
+# ===== OS / Editor =====
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# ===== Godot (ถ้าใช้ Godot runtime) =====
+.godot/
+.import/
+export/
+export_presets.cfg.bak
+*.translation
+# NOTE: ไม่ ignore .tscn/.tres/.gd/.json — เป็น source ที่ต้องเก็บ
+android/build/
+android/.gradle/
+android/local.properties
+
+# ===== Node / Web build (ถ้าใช้ Web runtime) =====
+node_modules/
+dist/
+build/
+out/
+coverage/
+.cache/
+.parcel-cache/
+.vite/
+*.log
+npm-debug.log*
+
+# ===== ที่เก็บชั่วคราว / ไฟล์ทดสอบหนัก =====
+/tmp/
+temp/
+*.tmp
+*.bak
+*.orig
+
+# ===== ความลับ (ห้าม commit เด็ดขาด) =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+*.jks
+*token*
+credentials.json
+service-account*.json
+
+# ===== Asset งานหนัก (ใช้ LFS แทน) =====
+# *.psd
+# *.blend
+# *.wav
+# *.xcf
